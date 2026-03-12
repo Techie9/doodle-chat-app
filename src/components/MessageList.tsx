@@ -39,13 +39,9 @@ export function MessageList({
     const prev = prevCountRef.current;
     prevCountRef.current = messages.length;
     if (messages.length > prev && prev > 0) {
-      const last = messages[messages.length - 1];
-      const isOwn = currentAuthor && last.author === currentAuthor;
-      if (isOwn) {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages.length, currentAuthor]);
+  }, [messages.length]);
 
   const didInitialScroll = useRef(false);
   useEffect(() => {
@@ -68,7 +64,14 @@ export function MessageList({
             className="message-list-load-btn"
             aria-label="Load older messages"
           >
-            {loadingOlder ? 'Loading…' : 'Load older messages'}
+            {loadingOlder ? (
+            <>
+              <span className="message-list-load-spinner" aria-hidden="true" />
+              Loading…
+            </>
+          ) : (
+            'Load older messages'
+          )}
           </button>
         </div>
       )}

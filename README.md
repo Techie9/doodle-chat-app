@@ -39,6 +39,23 @@ A simple, responsive chat interface built with React and TypeScript. It connects
 - `npm run build` – Production build.
 - `npm run preview` – Preview production build locally.
 
+## Architecture
+
+```
+src/
+  App.tsx              – main chat container (state, load/send, error/loading)
+  components/
+    MessageList        – renders message list, “Load older”, auto-scroll
+    MessageBubble      – single message (author, text, timestamp)
+    MessageInput       – author + message field + Send
+  api/
+    client.ts          – API communication (fetch messages, send message)
+  types/
+    api.ts             – Message, CreateMessageBody, GetMessagesParams, ApiErrorResponse
+  hooks/
+    useAuthor.ts       – author from localStorage, persist on send
+```
+
 ## Tech stack
 
 - React 18
@@ -50,3 +67,10 @@ A simple, responsive chat interface built with React and TypeScript. It connects
 The app uses the Vite proxy in `vite.config.ts`: requests to `/api` are forwarded to `http://localhost:3000`. For production, point the build to your API origin (e.g. via env or a different proxy).
 
 Authentication uses the shared Bearer token required by the challenge API (`super-secret-doodle-token`).
+
+## Possible Improvements
+
+- **WebSocket for real-time updates** – Push new messages to the UI without polling or manual refresh.
+- **Message pagination** – Extend “Load older” with infinite scroll or cursor-based pagination for large histories.
+- **Message grouping by author** – Group consecutive messages from the same author to reduce visual clutter.
+- **Better accessibility support** – Screen reader announcements for new messages, reduced motion preferences, and more granular ARIA live regions.

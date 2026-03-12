@@ -83,11 +83,25 @@ function App() {
         <div className="chat-messages-wrap">
           {error && (
             <div className="chat-error" role="alert">
-              {error}
+              <span>{error}</span>
+              <button
+                type="button"
+                className="chat-error__retry"
+                onClick={() => {
+                  setError(null);
+                  setLoading(true);
+                  loadMessages().finally(() => setLoading(false));
+                }}
+              >
+                Retry
+              </button>
             </div>
           )}
           {loading && messages.length === 0 ? (
-            <p className="chat-loading">Loading messages…</p>
+            <div className="chat-loading" aria-live="polite" aria-busy="true">
+              <div className="chat-loading__spinner" aria-hidden="true" />
+              <span>Loading messages…</span>
+            </div>
           ) : (
             <MessageList
               messages={messages}
