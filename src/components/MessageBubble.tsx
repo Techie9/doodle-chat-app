@@ -1,3 +1,4 @@
+import { decodeHtmlEntities } from '../utils/decodeHtmlEntities';
 import './MessageBubble.css';
 
 interface MessageBubbleProps {
@@ -13,6 +14,8 @@ export function MessageBubble({
   createdAt,
   isOwn,
 }: MessageBubbleProps) {
+  const decodedMessage = decodeHtmlEntities(message);
+  const decodedAuthor = decodeHtmlEntities(author);
   return (
     <div
       className={`message-bubble ${isOwn ? 'message-bubble--own' : 'message-bubble--incoming'}`}
@@ -20,10 +23,10 @@ export function MessageBubble({
     >
       {!isOwn && (
         <p className="message-bubble__author">
-          {author}
+          {decodedAuthor}
         </p>
       )}
-      <p className="message-bubble__text">{message}</p>
+      <p className="message-bubble__text">{decodedMessage}</p>
       <time
         className="message-bubble__time"
         dateTime={createdAt}
