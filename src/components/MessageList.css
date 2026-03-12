@@ -1,0 +1,61 @@
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.message-list-load {
+  flex-shrink: 0;
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+.message-list-load-btn {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  color: #1976d2;
+  background: transparent;
+  border: 1px solid #1976d2;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.message-list-load-btn:hover:not(:disabled) {
+  background: rgba(25, 118, 210, 0.08);
+}
+
+.message-list-load-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message-list-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message-list-li {
+  flex-shrink: 0;
+  display: flex;
+}
+
+.message-list-li--incoming {
+  justify-content: flex-start;
+}
+
+.message-list-li--own {
+  justify-content: flex-end;
+}
+
+.message-list-anchor {
+  height: 1px;
+  flex-shrink: 0;
+}
